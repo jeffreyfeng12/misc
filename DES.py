@@ -1,10 +1,21 @@
 import base64, re, binascii
 
+
+
+# still need to make it work with inputs where message/key are different
+# extend to larger texts
+# cut keys when input is too large maybe
+
+
+
 # M = message, K = key
 key = raw_input("Input message: ")
 message = raw_input("Input key: ") 
-M = "0110101001100110011001010110111001100111001100010011001000000000"
-K = "0110101001100110011001010110111001100111001100010011001000000000"
+K = ''.join(format(ord(x), 'b').rjust(8, '0') for x in key)
+M = ''.join(format(ord(x), 'b').rjust(8, '0') for x in message)
+
+K= K.ljust(64, '0')
+M = M.ljust(64, '0')
 
 output = ""
 idx = [57,49,41,33,25,17,9,
