@@ -1,7 +1,6 @@
 import base64, re, binascii
 
-# still need to make it work with inputs where message/key are different
-# all inputs are valid
+# works in every case (I think)
 
 # XOR function
 def xor_two_str(a,b):
@@ -88,6 +87,7 @@ for key in keys:
 
 #################### Replace M with indv_blocks
 #################### Oh god this is gonna be disgusting
+out = ""
 
 for blocks in indv_blocks:
     idx=[58,50,42,34,26,18,10,2,
@@ -187,7 +187,8 @@ for blocks in indv_blocks:
     hexout = ""
     for irev in ipRev:
         hexout += rl[irev-1]
-        
-    print "ciphertext: " + str(hex(int(hexout, 2))[2:])
+    
+    out += hex(int(hexout, 2))[2:].strip('L').rjust(16, '0')   
 
+print out
 ###### End Encoding
