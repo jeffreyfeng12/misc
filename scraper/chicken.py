@@ -36,12 +36,21 @@ def get_pictures(queued):
         db.append(clean(new_link))
     return db
 
+def save(db):
+    f = open("food.txt", "w+")
+    f.write("Search term: " + search_term + "\n")
+    for link in db:
+        f.write(link + "\n")
+    f.write("\n")
+    f.close()
+    
 def clean(input):
     return input.replace("amp;", "")
     
 def main():
     queued = scrape()
     db = get_pictures(queued)
+    save(db)
     print db
 
 if __name__ == '__main__': 
